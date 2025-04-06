@@ -1,0 +1,12 @@
+Row 7738 -  invalid name 
+Row 10024 -  wrong date format 
+Row 23636 -  invalid ID 
+Row 34119 -  invalid name 
+Row 34127 -  invalid name 
+Row 37756 -  invalid ID 
+Row 39109 -  wrong date format 
+Row 42361 - duplicate 
+Row 46083 -  invalid name 
+Row 46161 -  wrong date format 
+Row 49317 -  wrong date format 
+Row 59986 -  wrong date format 
