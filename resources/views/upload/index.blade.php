@@ -7,7 +7,15 @@
                 <label for="file">Select a file:</label>
                 <input type="file" class="form-control" name="file" id="file" accept=".xls,.xlsx" required>
                 <br>
-                <x-input-error :messages="$errors->get('file')" class="mt-2" />
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
@@ -15,6 +23,7 @@
         <div class="col-6">
             <div class="alert" role="alert">
                 <p>Last parsed row: <span id="parsed_row">0</span></p>
+                <a class="btn btn-secondary" href="{{ route('table.index') }}">Table of Data</a>
             </div>
         </div>
     </div>

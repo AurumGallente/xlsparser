@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Jobs\InitChunks;
 use App\Models\Row;
 use App\Processors\XlsProcessor;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -14,11 +17,18 @@ use function PHPUnit\Framework\isNull;
 class UploadController extends Controller
 {
 
-    public function index()
+    /**
+     * @return Factory|Application|View
+     */
+    public function index(): Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View
     {
         return view('upload.index');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function upload(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
@@ -40,9 +50,6 @@ class UploadController extends Controller
         catch (\Throwable $e) {
             return back()->withErrors('File parsing failed.');
         }
-
-        $processor = new XlsProcessor(storage_path('app/private').'/'.$path);
-        $chunks = $processor->createChunks();
 
         InitChunks::dispatch(storage_path('app/private').'/'.$path)->onQueue('chunks');
 
