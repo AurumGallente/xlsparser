@@ -127,6 +127,13 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'txtfile' => [
+            'driver' => 'custom',
+            'path' => storage_path('logs/result.txt'),
+            'processors' => [\App\Loggers\TxtLogger::class],
+            'via' => \App\Loggers\TxtLogger::class,
+        ]
+
     ],
 
 ];
